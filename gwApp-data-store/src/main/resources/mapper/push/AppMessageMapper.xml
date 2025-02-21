@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sse.sseapp.mapper.push.AppMessageMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.sse.sseapp.domain.push.AppMessage">
+        <result column="id" property="id" />
+        <result column="msg_id" property="msgId" />
+        <result column="status" property="status" />
+        <result column="create_by" property="createBy" />
+        <result column="update_by" property="updateBy" />
+        <result column="del_flag" property="delFlag" />
+        <result column="type" property="type" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="sendType" property="sendType" />
+        <result column="sendTime" property="sendTime" />
+        <result column="uuid" property="uuid" />
+        <result column="point_trade_date" property="pointTradeDate" />
+        <result column="point_trade_time" property="pointTradeTime" />
+        <result column="point_current_price" property="pointCurrentPrice" />
+        <result column="point_amplitude" property="pointAmplitude" />
+        <result column="point_stock_code" property="pointStockCode" />
+        <result column="point_stock_name" property="pointStockName" />
+        <result column="point_up_and_down" property="pointUpAndDown" />
+        <result column="announcement_CDOCCODE" property="announcementCdoccode" />
+        <result column="announcement_CTITLE" property="announcementCtitle" />
+        <result column="announcement_CSUMMARY" property="announcementCsummary" />
+        <result column="announcement_KEYWORD" property="announcementKeyword" />
+        <result column="announcement_CRELEASETIME" property="announcementCreleasetime" />
+        <result column="announcement_GSJC" property="announcementGsjc" />
+        <result column="announcement_ZQDM" property="announcementZqdm" />
+        <result column="announcement_CURL" property="announcementCurl" />
+        <result column="announcement_CSITECODE" property="announcementCsitecode" />
+        <result column="announcement_ISIMPORTANT" property="announcementIsimportant" />
+        <result column="announcement_FILETYPE" property="announcementFiletype" />
+    </resultMap>
+    <resultMap id="AppMessageResultDto" type="com.sse.sseapp.dto.appMessage.AppMessageResultDto">
+        <result column="id" property="id" />
+        <result column="msg_id" property="msgId" />
+        <result column="status" property="status" />
+        <result column="create_by" property="createBy" />
+        <result column="update_by" property="updateBy" />
+        <result column="del_flag" property="delFlag" />
+        <result column="type" property="type" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="sendType" property="sendType" />
+        <result column="sendTime" property="sendTime" />
+        <result column="uuid" property="uuid" />
+        <result column="point_trade_date" property="pointTradeDate" />
+        <result column="point_trade_time" property="pointTradeTime" />
+        <result column="point_current_price" property="pointCurrentPrice" />
+        <result column="point_amplitude" property="pointAmplitude" />
+        <result column="point_stock_code" property="pointStockCode" />
+        <result column="point_stock_name" property="pointStockName" />
+        <result column="point_up_and_down" property="pointUpAndDown" />
+        <result column="announcement_CDOCCODE" property="announcementCdoccode" />
+        <result column="announcement_CTITLE" property="announcementCtitle" />
+        <result column="announcement_CSUMMARY" property="announcementCsummary" />
+        <result column="announcement_KEYWORD" property="announcementKeyword" />
+        <result column="announcement_CRELEASETIME" property="announcementCreleasetime" />
+        <result column="announcement_GSJC" property="announcementGsjc" />
+        <result column="announcement_ZQDM" property="announcementZqdm" />
+        <result column="announcement_CURL" property="announcementCurl" />
+        <result column="announcement_CSITECODE" property="announcementCsitecode" />
+        <result column="announcement_ISIMPORTANT" property="announcementIsimportant" />
+        <result column="announcement_FILETYPE" property="announcementFiletype" />
+        <result column="jpush_received" property="jpushReceived" />
+        <result column="android_pns_sent" property="androidPnsSent" />
+        <result column="android_pns_received" property="androidPnsReceived" />
+        <result column="ios_apns_sent" property="iosApnsSent" />
+        <result column="ios_apns_received" property="iosApnsReceived" />
+        <result column="ios_msg_received" property="iosMsgReceived" />
+        <result column="live_acivity_sent" property="liveAcivitySent" />
+        <result column="live_acivity_received" property="liveAcivityReceived" />
+        <result column="quickapp_pns_sent" property="quickappPnsSent" />
+        <result column="quickapp_jpush_received" property="quickappJpushReceived" />
+        <result column="wp_mpns_sent" property="wpMpnsSent" />
+        <result column="android_received" property="androidReceived" />
+    </resultMap>
+    <select id="selectAppMessageResultDtoById" resultMap="AppMessageResultDto">
+        SELECT
+            am.id,
+            am.msg_id,
+            am.status,
+            am.type,
+            am.create_time,
+            am.sendType,
+            am.sendTime,
+            am.uuid,
+            am.point_trade_date,
+            am.point_trade_time,
+            am.point_current_price,
+            am.point_amplitude,
+            am.point_stock_code,
+            am.point_stock_name,
+            am.point_up_and_down,
+            am.announcement_CDOCCODE,
+            am.announcement_CTITLE,
+            am.announcement_CSUMMARY,
+            am.announcement_KEYWORD,
+            am.announcement_CRELEASETIME,
+            am.announcement_GSJC,
+            am.announcement_ZQDM,
+            am.announcement_CURL,
+            am.announcement_CSITECODE,
+            am.announcement_ISIMPORTANT,
+            am.announcement_FILETYPE,
+            am.update_time,
+            ampr.jpush_received,
+            ampr.android_pns_sent,
+            ampr.android_pns_received,
+            ampr.ios_apns_sent,
+            ampr.ios_apns_received,
+            ampr.ios_msg_received,
+            ampr.live_acivity_sent,
+            ampr.live_acivity_received,
+            ampr.quickapp_pns_sent,
+            ampr.quickapp_jpush_received,
+            ampr.wp_mpns_sent,
+            ampr.android_received
+        FROM
+            app_message am
+                LEFT JOIN app_message_push_record ampr ON ampr.msg_id = am.msg_id
+        WHERE
+            am.del_flag = '0'
+          AND am.id = #{id}
+    </select>
+
+</mapper>

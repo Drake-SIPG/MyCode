@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sse.sseapp.mapper.push.AppMessagePushRecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.sse.sseapp.domain.push.AppMessagePushRecord">
+        <result column="id" property="id"/>
+        <result column="msg_id" property="msgId"/>
+        <result column="jpush_received" property="jpushReceived"/>
+        <result column="android_pns_sent" property="androidPnsSent"/>
+        <result column="android_pns_received" property="androidPnsReceived"/>
+        <result column="ios_apns_sent" property="iosApnsSent"/>
+        <result column="ios_apns_received" property="iosApnsReceived"/>
+        <result column="ios_msg_received" property="iosMsgReceived"/>
+        <result column="live_acivity_sent" property="liveAcivitySent"/>
+        <result column="live_acivity_received" property="liveAcivityReceived"/>
+        <result column="quickapp_pns_sent" property="quickappPnsSent"/>
+        <result column="quickapp_jpush_received" property="quickappJpushReceived"/>
+        <result column="wp_mpns_sent" property="wpMpnsSent"/>
+        <result column="android_received" property="androidReceived"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <select id="historyList" resultType="com.sse.sseapp.domain.push.AppMessagePushRecord">
+        SELECT id,
+               msg_id,
+               jpush_received,
+               android_pns_sent,
+               android_pns_received,
+               ios_apns_sent,
+               ios_apns_received,
+               ios_msg_received,
+               live_acivity_sent,
+               live_acivity_received,
+               quickapp_pns_sent,
+               quickapp_jpush_received,
+               wp_mpns_sent,
+               create_time,
+               android_received
+        FROM app_message_push_record
+        where DATE_SUB(NOW(), INTERVAL #{expirationTime} DAY) >= create_time
+    </select>
+
+</mapper>

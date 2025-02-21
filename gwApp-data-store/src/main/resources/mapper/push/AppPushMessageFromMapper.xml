@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sse.sseapp.mapper.push.AppPushMessageFromMapper">
+
+    <select id="list" parameterType="com.sse.sseapp.domain.push.AppPushMessageFrom" resultType="com.sse.sseapp.domain.push.AppPushMessageFrom">
+        select id,
+        from_id,
+        from_name,
+        status,
+        create_time,
+        update_time
+        from app_push_message_from
+        <where>
+            <if test="formId != null and formId !=  ''">
+                AND from_id = #{formId}
+            </if>
+            <if test="formName != null and formName !=  ''">
+                AND from_name like concat('%', #{formName}, '%')
+            </if>
+            <if test="status != null and status !=  ''">
+                AND status = #{status}
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+    <select id="getInfoByFromId" resultType="com.sse.sseapp.domain.push.AppPushMessageFrom">
+        select id,
+               from_id,
+               from_name,
+               status,
+               create_time,
+               update_time
+        from app_push_message_from
+        where from_id = #{formId}
+    </select>
+</mapper>

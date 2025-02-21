@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sse.sseapp.mapper.app.AppOneUserUsedMapper">
+
+    <select id="selectByUserId" resultType="com.sse.sseapp.domain.app.AppOneUserUsed">
+        select id,
+               user_id,
+               mobile,
+               nav_id,
+               create_time,
+               update_time
+        from app_one_user_used
+        where user_id = #{userId}
+        order by update_time desc
+        limit 4
+    </select>
+
+    <select id="selectByNavId" parameterType="com.sse.sseapp.domain.app.AppOneUserUsed" resultType="java.lang.Integer">
+        select count(*)
+        from app_one_user_used
+        where user_id = #{userId} and nav_id = #{navId}
+    </select>
+
+    <delete id="deleteByUserId" parameterType="com.sse.sseapp.domain.app.AppOneUserUsed">
+        delete from app_one_user_used where id not in (
+        select id from app_one_user_used a
+        where a.id in (select id from app_one_user_used b where b.user_id = a.user_id order by update_time desc limit 4))
+    </delete>
+
+    <update id="updateByUserId" parameterType="com.sse.sseapp.domain.app.AppOneUserUsed">
+        update app_one_user_used
+        set update_time = #{updateTime}
+        where user_id = #{userId} and nav_id = #{navId}
+    </update>
+
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sse.sseapp.mapper.app.AppMessageDeviceMapper">
+
+    <select id="selectByDeviceId" resultType="com.sse.sseapp.domain.app.AppMessageDevice">
+        select id,
+               device_id,
+               message_id,
+               user_id,
+               mobile,
+               create_time,
+               update_time
+        from app_message_device
+        where device_id = #{deviceId}
+        limit 1
+    </select>
+
+
+    <select id="selectByMobile" resultType="com.sse.sseapp.domain.app.AppMessageDevice">
+        select id,
+               device_id,
+               message_id,
+               user_id,
+               mobile,
+               create_time,
+               update_time
+        from app_message_device
+        where mobile = #{mobile}
+            limit 1
+    </select>
+</mapper>

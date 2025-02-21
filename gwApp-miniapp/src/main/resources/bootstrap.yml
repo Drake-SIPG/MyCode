@@ -1,0 +1,41 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: gwApp-miniapp
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  cloud:
+    nacos:
+      username: nacos
+      password: nacos
+      server-addr: 172.17.13.45:8848,172.17.13.46:8848,172.17.13.47:8848
+      config:
+        file-extension: yml
+        shared-configs:
+          - data-id: public-${spring.profiles.active}.yml
+          - data-id: dynamic-${spring.profiles.active}.yml
+            refresh: true
+      discovery:
+        namespace: public
+
+  main:
+    allow-bean-definition-overriding: true
+
+server:
+  port: ${server.ports.http.gwApp-miniapp}
+  servlet:
+    context-path: /app/miniapp
+  tongweb:
+    license:
+      path: ./license.dat
+
+logging:
+  config: classpath:logback-nacos.xml
+
+app:
+  encryption: false
+  #  重试次数
+  optionSchool:
+    errCount: 3

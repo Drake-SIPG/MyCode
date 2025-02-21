@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sse.sseapp.mapper.system.SysGatewayLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.sse.sseapp.domain.system.SysGatewayLog">
+        <id column="Id" property="id" />
+        <result column="target_server" property="targetServer" />
+        <result column="user_name" property="userName" />
+        <result column="person_name" property="personName" />
+        <result column="request_path" property="requestPath" />
+        <result column="request_method" property="requestMethod" />
+        <result column="request_schema" property="requestSchema" />
+        <result column="ip" property="ip" />
+        <result column="request_time" property="requestTime" />
+        <result column="query_params" property="queryParams" />
+        <result column="request_body" property="requestBody" />
+        <result column="execute_time" property="executeTime" />
+        <result column="request_content_type" property="requestContentType" />
+        <result column="response_code" property="responseCode" />
+    </resultMap>
+
+</mapper>

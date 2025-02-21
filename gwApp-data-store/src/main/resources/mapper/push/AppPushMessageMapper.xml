@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sse.sseapp.mapper.push.AppPushMessageMapper">
+
+    <select id="pushList" resultType="com.sse.sseapp.domain.push.AppPushMessage">
+        SELECT id,
+               msg_type,
+               title,
+               content,
+               click_type,
+               click_url,
+               standalone_mode,
+               phone_no,
+               `from`,
+               `function`,
+               publish_time,
+               create_time,
+               update_time,
+               publish_status,
+               fail_number
+        FROM app_push_message
+        WHERE (publish_time = ''
+            OR publish_time is null
+            OR publish_time &lt;= SYSDATE())
+          AND publish_status in (0, 2)
+    </select>
+
+    <select id="getMsgIdList" resultType="java.lang.String">
+        SELECT msg_id
+        FROM app_push_message
+        where publish_status = #{publishStatus}
+    </select>
+
+    <select id="historyList" resultType="com.sse.sseapp.domain.push.AppPushMessage">
+        SELECT id,
+               msg_type,
+               title,
+               content,
+               click_type,
+               click_url,
+               standalone_mode,
+               phone_no,
+               `from`,
+               `function`,
+               publish_time,
+               create_time,
+               update_time,
+               publish_status,
+               fail_number
+        FROM app_push_message
+        where DATE_SUB(NOW(), INTERVAL #{expirationTime} DAY) >= create_time
+    </select>
+
+    <update id="edit" parameterType="com.sse.sseapp.domain.push.AppPushMessage">
+        update app_push_message
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="publishStatus != null and publishStatus != ''">publish_status = #{publishStatus},</if>
+            <if test="msgId != null and msgId != ''">msg_id = #{msgId},</if>
+            <if test="sendNo != null and sendNo != ''">send_no = #{sendNo},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="failNumber != null">fail_number = #{failNumber},</if>
+        </trim>
+        where id = #{id}
+    </update>
+</mapper>
